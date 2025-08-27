@@ -1,0 +1,33 @@
+{
+  "name": "@qa-playwright/worker",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.465.0",
+    "@aws-sdk/s3-request-presigner": "^3.465.0",
+    "@prisma/client": "^5.6.0",
+    "@qa-playwright/shared": "workspace:*",
+    "bullmq": "^4.12.4",
+    "cron-parser": "^4.9.0",
+    "dotenv": "^16.3.1",
+    "ioredis": "^5.3.2",
+    "nodemailer": "^6.9.7",
+    "pino": "^8.16.2",
+    "pino-pretty": "^10.2.3",
+    "playwright": "^1.40.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/nodemailer": "^6.4.14",
+    "eslint": "^8.54.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.2"
+  }
+}
