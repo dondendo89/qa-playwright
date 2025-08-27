@@ -6,6 +6,8 @@ services:
     env: docker
     dockerfilePath: ./infra/docker/web.Dockerfile
     healthCheckPath: /api/health
+    autoDeploy: true
+    buildCommand: pnpm build
     envVars:
       - key: NODE_ENV
         value: production
@@ -42,14 +44,14 @@ services:
         sync: false
       - key: APP_URL
         sync: false
-    autoDeploy: true
-    buildCommand: pnpm build
 
   # Worker service (BullMQ + Playwright)
   - type: worker
     name: qa-playwright-worker
     env: docker
     dockerfilePath: ./infra/docker/worker.Dockerfile
+    autoDeploy: true
+    buildCommand: pnpm build
     envVars:
       - key: NODE_ENV
         value: production
@@ -78,18 +80,15 @@ services:
         sync: false
       - key: SLACK_WEBHOOK_URL
         sync: false
-    autoDeploy: true
-    buildCommand: pnpm build
+
+  # Redis service
+  - type: redis
+    name: qa-playwright-redis
+    plan: standard
+    ipAllowList: [] # Consenti tutte le connessioni
 
 # Database (PostgreSQL)
 databases:
   - name: qa-playwright-db
     plan: standard
     postgresMajorVersion: 15
-
-# Redis
-services:
-  - type: redis
-    name: qa-playwright-redis
-    plan: standard
-    ipAllowList: [] # Consenti tutte le connessioni
