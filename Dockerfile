@@ -31,23 +31,18 @@ FROM node:18-alpine AS web
 RUN npm install -g pnpm
 WORKDIR /app
 
-# Copy built web application
-COPY --from=base /app/apps/web/.next ./apps/web/.next
-COPY --from=base /app/apps/web/package.json ./apps/web/
-COPY --from=base /app/apps/web/public ./apps/web/public
-COPY --from=base /app/apps/web/next.config.js ./apps/web/
-COPY --from=base /app/node_modules ./node_modules
-COPY --from=base /app/package.json ./
-COPY --from=base /app/pnpm-workspace.yaml ./
-COPY --from=base /app/packages ./packages
-COPY --from=base /app/infra ./infra
+# Copy everything from base stage
+COPY --from=base /app ./
 
 # Expose port
 EXPOSE $PORT
 
-# Start web application
-WORKDIR /app/apps/web
-CMD ["sh", "-c", "next start -H 0.0.0.0 -p ${PORT:-3000}"]
+# Set environment variable for Next.js
+ENV HOSTNAME="0.0.0.0"
+ENV PORT=${PORT:-3000}
+
+# Start web application using pnpm
+CMD ["sh", "-c", "PORT=${PORT:-3000} pnpm --filter @qa-playwright/web start -- -H 0.0.0.0 -p ${PORT:-3000}"]
 
 # Production stage for worker
 FROM node:18-alpine AS worker
