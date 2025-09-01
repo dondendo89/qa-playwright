@@ -3,9 +3,8 @@
   "services": [
     {
       "name": "web",
-      "buildCommand": "npm run build",
-      "startCommand": "npm run start",
-      "root": "apps/web",
+      "dockerfile": "Dockerfile",
+      "dockerTarget": "web",
       "env": {
         "NODE_ENV": "production",
         "APP_URL": "https://qa-playwright.up.railway.app",
@@ -26,9 +25,8 @@
     },
     {
       "name": "worker",
-      "buildCommand": "npm run build",
-      "startCommand": "npm run start",
-      "root": "apps/worker",
+      "dockerfile": "Dockerfile",
+      "dockerTarget": "worker",
       "env": {
         "NODE_ENV": "production",
         "DATABASE_URL": "postgresql://user:pass@host:port/dbname",
