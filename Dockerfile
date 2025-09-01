@@ -40,10 +40,10 @@ COPY --from=base /app/package.json ./
 COPY --from=base /app/pnpm-workspace.yaml ./
 
 # Expose port
-EXPOSE 3000
+EXPOSE $PORT
 
 # Start web application
-CMD ["pnpm", "--filter", "@qa-playwright/web", "start"]
+CMD ["sh", "-c", "cd apps/web && next start -H 0.0.0.0 -p ${PORT:-3000}"]
 
 # Production stage for worker
 FROM node:18-alpine AS worker
