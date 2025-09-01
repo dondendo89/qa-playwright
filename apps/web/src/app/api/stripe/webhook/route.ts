@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { headers } from 'next/headers'
 import { stripe } from '@/lib/stripe'
-import prisma from '@qa-playwright/prisma/client'
+import prisma from '../../../../../infra/prisma/client'
 
 export async function POST(request: NextRequest) {
   const body = await request.text()
