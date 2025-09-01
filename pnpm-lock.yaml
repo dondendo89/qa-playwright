@@ -24,6 +24,9 @@ importers:
         specifier: ^1.40.0
         version: 1.55.0
     devDependencies:
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.11
       typescript:
         specifier: ^5.0.0
         version: 5.9.2
@@ -34,6 +37,9 @@ importers:
         specifier: ^5.0.0
         version: 5.22.0(prisma@5.22.0)
     devDependencies:
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.11
       prisma:
         specifier: ^5.0.0
         version: 5.22.0
@@ -46,6 +52,9 @@ importers:
 
   packages/shared:
     devDependencies:
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.11
       typescript:
         specifier: ^5.0.0
         version: 5.9.2

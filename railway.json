@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "web",
-      "startCommand": "pnpm --filter web start",
+      "startCommand": "pnpm --filter @qa-playwright/web start",
       "env": {
         "NODE_ENV": "production",
         "APP_URL": "https://qa-playwright.up.railway.app",
@@ -24,7 +24,7 @@
     },
     {
       "name": "worker",
-      "startCommand": "pnpm --filter worker start",
+      "startCommand": "pnpm --filter @qa-playwright/worker start",
       "env": {
         "NODE_ENV": "production",
         "DATABASE_URL": "postgresql://user:pass@host:port/dbname",

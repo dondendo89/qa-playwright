@@ -1,2 +1,2 @@
-web: pnpm --filter web start
-worker: pnpm --filter worker start
+web: pnpm --filter @qa-playwright/web start
+worker: pnpm --filter @qa-playwright/worker start
