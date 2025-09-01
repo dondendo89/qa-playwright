@@ -1,4 +1,4 @@
-import { logger } from './logger';
+import { logger } from './logger.js';
 export async function setupScheduler() {
     logger.info('Setting up scheduler...');
     // This would be implemented with actual scheduling logic

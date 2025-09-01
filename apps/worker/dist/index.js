@@ -1,5 +1,5 @@
-import { logger } from './lib/logger';
-import { setupScheduler } from './lib/scheduler';
+import { logger } from './lib/logger.js';
+import { setupScheduler } from './lib/scheduler.js';
 async function main() {
     logger.info('Starting QA Playwright worker...');
     try {
