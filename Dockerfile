@@ -29,6 +29,9 @@ RUN cd infra/prisma && pnpm generate
 # Copy rest of source code
 COPY . .
 
+# Build the Prisma package first
+RUN pnpm --filter @qa-playwright/prisma build
+
 # Build the web application
 RUN pnpm --filter @qa-playwright/web build
 
