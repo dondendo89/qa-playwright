@@ -34,4 +34,4 @@ ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0
 
 # Start the web application
-CMD ["sh", "-c", "cd apps/web && PORT=${PORT:-3000} npx next start -H 0.0.0.0 -p ${PORT:-3000}"]
+CMD ["sh", "-c", "cd infra/prisma && npx prisma migrate deploy && cd ../../apps/web && PORT=${PORT:-3000} npx next start -H 0.0.0.0 -p ${PORT:-3000}"]
