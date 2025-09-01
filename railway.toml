@@ -1,0 +1,48 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+numReplicas = 1
+sleepApplication = false
+restartPolicyType = "ON_FAILURE"
+
+# Web service configuration
+[[services]]
+name = "web"
+dockerTarget = "web"
+
+[services.env]
+NODE_ENV = "production"
+APP_URL = "https://qa-playwright.up.railway.app"
+DATABASE_URL = "${{Postgres.DATABASE_URL}}"
+REDIS_URL = "${{Redis.REDIS_URL}}"
+SESSION_SECRET = "${{SESSION_SECRET}}"
+STRIPE_SECRET_KEY = "${{STRIPE_SECRET_KEY}}"
+STRIPE_WEBHOOK_SECRET = "${{STRIPE_WEBHOOK_SECRET}}"
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = "${{NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}}"
+EMAIL_SERVER = "${{EMAIL_SERVER}}"
+EMAIL_FROM = "${{EMAIL_FROM}}"
+S3_BUCKET = "${{S3_BUCKET}}"
+S3_REGION = "${{S3_REGION}}"
+S3_ACCESS_KEY = "${{S3_ACCESS_KEY}}"
+S3_SECRET_KEY = "${{S3_SECRET_KEY}}"
+SLACK_WEBHOOK_URL = "${{SLACK_WEBHOOK_URL}}"
+
+# Worker service configuration
+[[services]]
+name = "worker"
+dockerTarget = "worker"
+
+[services.env]
+NODE_ENV = "production"
+DATABASE_URL = "${{Postgres.DATABASE_URL}}"
+REDIS_URL = "${{Redis.REDIS_URL}}"
+WORKER_CONCURRENCY = "2"
+EMAIL_SERVER = "${{EMAIL_SERVER}}"
+EMAIL_FROM = "${{EMAIL_FROM}}"
+S3_BUCKET = "${{S3_BUCKET}}"
+S3_REGION = "${{S3_REGION}}"
+S3_ACCESS_KEY = "${{S3_ACCESS_KEY}}"
+S3_SECRET_KEY = "${{S3_SECRET_KEY}}"
+SLACK_WEBHOOK_URL = "${{SLACK_WEBHOOK_URL}}"
