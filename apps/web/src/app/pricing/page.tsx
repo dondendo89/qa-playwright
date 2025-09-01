@@ -1,67 +1,77 @@
 'use client'
 
 import { useState } from 'react'
-import { Check, Star, Zap, Shield, Users } from 'lucide-react'
+import { useSession } from 'next-auth/react'
+import { Check, Star, Zap, Shield, Users, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
+import { PRICING_PLANS } from '@/lib/stripe'
 
 export default function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(false)
 
+  const { data: session } = useSession()
+  const [loading, setLoading] = useState<string | null>(null)
+
+  const handleSubscribe = async (planKey: string) => {
+    if (!session) {
+      window.location.href = '/auth/login'
+      return
+    }
+
+    setLoading(planKey)
+    try {
+      const response = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ plan: planKey }),
+      })
+
+      const data = await response.json()
+      
+      if (data.url) {
+        window.location.href = data.url
+      } else {
+        throw new Error('No checkout URL received')
+      }
+    } catch (error) {
+      console.error('Subscription error:', error)
+      alert('Errore durante la creazione della sessione di pagamento')
+    } finally {
+      setLoading(null)
+    }
+  }
+
   const plans = [
     {
-      name: 'Starter',
+      key: 'starter',
+      name: PRICING_PLANS.starter.name,
       description: 'Perfetto per piccoli progetti',
-      price: isAnnual ? 9 : 12,
-      originalPrice: isAnnual ? 12 : null,
-      period: isAnnual ? '/mese (fatturato annualmente)' : '/mese',
-      features: [
-        '10 test al mese',
-        'Report base',
-        'Email support',
-        '1 progetto',
-        'Cronologia 30 giorni'
-      ],
+      price: PRICING_PLANS.starter.price,
+      features: PRICING_PLANS.starter.features,
       popular: false,
       buttonText: 'Inizia Starter',
       buttonClass: 'border border-blue-600 text-blue-600 hover:bg-blue-50'
     },
     {
-      name: 'Professional',
+      key: 'professional',
+      name: PRICING_PLANS.professional.name,
       description: 'Per team e progetti più grandi',
-      price: isAnnual ? 29 : 39,
-      originalPrice: isAnnual ? 39 : null,
-      period: isAnnual ? '/mese (fatturato annualmente)' : '/mese',
-      features: [
-        '100 test al mese',
-        'Report avanzati',
-        'Priority support',
-        '5 progetti',
-        'Cronologia 90 giorni',
-        'Integrazione CI/CD',
-        'Test scheduling'
-      ],
+      price: PRICING_PLANS.professional.price,
+      features: PRICING_PLANS.professional.features,
       popular: true,
       buttonText: 'Inizia Professional',
       buttonClass: 'bg-blue-600 text-white hover:bg-blue-700'
     },
     {
-      name: 'Enterprise',
+      key: 'enterprise',
+      name: PRICING_PLANS.enterprise.name,
       description: 'Per grandi organizzazioni',
-      price: isAnnual ? 99 : 129,
-      originalPrice: isAnnual ? 129 : null,
-      period: isAnnual ? '/mese (fatturato annualmente)' : '/mese',
-      features: [
-        'Test illimitati',
-        'Report personalizzati',
-        'Dedicated support',
-        'Progetti illimitati',
-        'Cronologia illimitata',
-        'API completa',
-        'White-label',
-        'SLA garantito'
-      ],
+      price: PRICING_PLANS.enterprise.price,
+      features: PRICING_PLANS.enterprise.features,
       popular: false,
-      buttonText: 'Contatta Vendite',
+      buttonText: 'Inizia Enterprise',
       buttonClass: 'border border-gray-300 text-gray-700 hover:bg-gray-50'
     }
   ]
@@ -76,6 +86,23 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4">
+        {/* Paywall Alert */}
+        {typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('paywall') && (
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
+            <div className="flex items-center">
+              <AlertCircle className="h-5 w-5 text-yellow-600 mr-2" />
+              <div>
+                <p className="text-yellow-800 font-medium">
+                  Sottoscrizione richiesta
+                </p>
+                <p className="text-yellow-700 text-sm">
+                  Per accedere a questa funzionalità è necessario un piano attivo. Scegli il piano più adatto alle tue esigenze.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -169,10 +196,7 @@ export default function PricingPage() {
                 
                 <div className="mb-4">
                   <span className="text-4xl font-bold text-gray-900">€{plan.price}</span>
-                  {plan.originalPrice && (
-                    <span className="text-lg text-gray-500 line-through ml-2">€{plan.originalPrice}</span>
-                  )}
-                  <span className="text-gray-600 block text-sm">{plan.period}</span>
+                  <span className="text-gray-600 block text-sm">/mese</span>
                 </div>
               </div>
               
@@ -185,8 +209,12 @@ export default function PricingPage() {
                 ))}
               </ul>
               
-              <button className={`w-full py-3 px-4 rounded-lg transition-colors ${plan.buttonClass}`}>
-                {plan.buttonText}
+              <button 
+                onClick={() => handleSubscribe(plan.key)}
+                disabled={loading === plan.key}
+                className={`w-full py-3 px-4 rounded-lg transition-colors ${plan.buttonClass} disabled:opacity-50 disabled:cursor-not-allowed`}
+              >
+                {loading === plan.key ? 'Caricamento...' : plan.buttonText}
               </button>
             </div>
           ))}

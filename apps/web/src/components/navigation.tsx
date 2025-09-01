@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useSession, signOut } from 'next-auth/react'
 import { cn } from '@/lib/utils'
-import { BarChart3, FolderOpen, Settings, Target } from 'lucide-react'
+import { BarChart3, FolderOpen, Settings, Target, LogOut } from 'lucide-react'
 
 // Navigation for authenticated users
 const authenticatedNavigation = [
@@ -43,12 +44,10 @@ const publicNavigation = [
   },
 ]
 
-interface NavigationProps {
-  isAuthenticated?: boolean
-}
-
-export function Navigation({ isAuthenticated = false }: NavigationProps) {
+export function Navigation() {
   const pathname = usePathname()
+  const { data: session, status } = useSession()
+  const isAuthenticated = !!session
   const navigation = isAuthenticated ? authenticatedNavigation : publicNavigation
 
   return (
@@ -94,15 +93,19 @@ export function Navigation({ isAuthenticated = false }: NavigationProps) {
       {isAuthenticated && (
         <div className="flex items-center space-x-4 ml-8">
           <div className="text-sm text-muted-foreground">
-            Test rimanenti: <span className="font-medium text-foreground">0</span>
+            Ciao, <span className="font-medium text-foreground">{session?.user?.name || session?.user?.email}</span>
           </div>
           <Link
             href="/pricing"
-            className="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+            className="bg-blue-600 text-white px-3 py-1.5 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors"
           >
-            Acquista Test
+            Upgrade
           </Link>
-          <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <button 
+            onClick={() => signOut({ callbackUrl: '/' })}
+            className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <LogOut className="mr-1 h-4 w-4" />
             Logout
           </button>
         </div>

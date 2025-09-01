@@ -22,42 +22,24 @@ export default function ProjectsPage() {
   const [newProject, setNewProject] = useState({ name: '', description: '' })
 
   useEffect(() => {
-    // Mock data for now - will be replaced with API calls
-    const mockProjects: Project[] = [
-      {
-        id: '1',
-        name: 'E-commerce Website',
-        description: 'Test suite per il sito e-commerce principale',
-        userId: 'user1',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        _count: { targets: 5 },
-      },
-      {
-        id: '2',
-        name: 'Corporate Website',
-        description: 'Test per il sito aziendale e landing pages',
-        userId: 'user1',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        _count: { targets: 3 },
-      },
-      {
-        id: '3',
-        name: 'Mobile App API',
-        description: 'Test delle API per l\'applicazione mobile',
-        userId: 'user1',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        _count: { targets: 8 },
-      },
-    ]
-    
-    setTimeout(() => {
-      setProjects(mockProjects)
-      setLoading(false)
-    }, 1000)
-  }, [])
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch('/api/projects')
+        if (response.ok) {
+          const data = await response.json()
+          setProjects(data)
+        } else {
+          console.error('Failed to fetch projects')
+        }
+      } catch (error) {
+        console.error('Error fetching projects:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProjects()
+        }, [])
 
   const handleCreateProject = () => {
     if (!newProject.name.trim()) return

@@ -3,8 +3,10 @@
 import { useState } from 'react'
 import { Eye, EyeOff, Mail, User, Lock, Gift } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function RegisterPage() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,6 +17,7 @@ export default function RegisterPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [successMessage, setSuccessMessage] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -60,14 +63,32 @@ export default function RegisterPage() {
     setIsLoading(true)
     
     try {
-      // TODO: Implement actual registration API call
-      await new Promise(resolve => setTimeout(resolve, 2000)) // Simulate API call
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password
+        })
+      })
       
-      // Redirect to dashboard or show success message
-      console.log('Registration successful:', formData)
+      const data = await response.json()
       
+      if (!response.ok) {
+        setErrors({ general: data.error || 'Errore durante la registrazione' })
+        return
+      }
+      
+      // Registration successful, show success message and redirect
+      setSuccessMessage('Registrazione completata con successo! Reindirizzamento al login...')
+      setTimeout(() => {
+        router.push('/auth/login')
+      }, 2000)
     } catch (error) {
-      console.error('Registration failed:', error)
+      console.error('Registration error:', error)
       setErrors({ general: 'Errore durante la registrazione. Riprova.' })
     } finally {
       setIsLoading(false)
@@ -109,6 +130,13 @@ export default function RegisterPage() {
             {errors.general && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-3">
                 <p className="text-sm text-red-600">{errors.general}</p>
+              </div>
+            )}
+
+            {/* Success Message */}
+            {successMessage && (
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+                <p className="text-sm text-green-600">{successMessage}</p>
               </div>
             )}
 

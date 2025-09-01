@@ -3,8 +3,10 @@
 import { useState } from 'react'
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -48,15 +50,23 @@ export default function LoginPage() {
     setIsLoading(true)
     
     try {
-      // TODO: Implement actual login API call
-      await new Promise(resolve => setTimeout(resolve, 2000)) // Simulate API call
+      const { signIn } = await import('next-auth/react')
       
-      // Redirect to dashboard
-      console.log('Login successful:', formData)
+      const result = await signIn('credentials', {
+        email: formData.email,
+        password: formData.password,
+        redirect: false
+      })
       
+      if (result?.error) {
+        setErrors({ general: 'Email o password non corretti' })
+      } else {
+        // Redirect to dashboard
+        router.push('/dashboard')
+      }
     } catch (error) {
-      console.error('Login failed:', error)
-      setErrors({ general: 'Email o password non corretti. Riprova.' })
+      console.error('Login error:', error)
+      setErrors({ general: 'Errore durante il login. Riprova.' })
     } finally {
       setIsLoading(false)
     }
