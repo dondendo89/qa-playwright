@@ -858,3 +858,12 @@
 2025-09-01T10:25:33.003994Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
 2025-09-01T10:25:33.103649Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("Dockerfile")}
 2025-09-01T10:25:33.103665Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-09-01T10:32:32.145584Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("infra/prisma/migrations/001_init.sql")}
+2025-09-01T10:32:32.145640Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@qa-playwright/prisma"), path: AnchoredSystemPathBuf("infra/prisma") }}))
+2025-09-01T10:32:33.845770Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("infra/prisma/migrations/001_init.sql")}
+2025-09-01T10:32:33.845788Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@qa-playwright/prisma"), path: AnchoredSystemPathBuf("infra/prisma") }}))
+2025-09-01T10:32:39.046333Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("infra/prisma/migrations/20240101000000_init")}
+2025-09-01T10:32:39.046350Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@qa-playwright/prisma"), path: AnchoredSystemPathBuf("infra/prisma") }}))
+2025-09-01T10:32:39.046406Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-09-01T10:32:44.797128Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("infra/prisma/migrations/001_init.sql"), AnchoredSystemPathBuf("infra/prisma/migrations/20240101000000_init/migration.sql")}
+2025-09-01T10:32:44.797146Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@qa-playwright/prisma"), path: AnchoredSystemPathBuf("infra/prisma") }}))
