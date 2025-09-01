@@ -17,11 +17,14 @@ COPY infra/prisma/package.json ./infra/prisma/
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
-# Copy source code
-COPY . .
+# Copy Prisma schema first
+COPY infra/prisma/schema.prisma ./infra/prisma/
 
 # Generate Prisma client
 RUN cd infra/prisma && pnpm generate
+
+# Copy rest of source code
+COPY . .
 
 # Build the web application
 RUN pnpm --filter @qa-playwright/web build
