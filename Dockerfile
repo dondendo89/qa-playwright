@@ -21,7 +21,7 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 # Generate Prisma client
-RUN pnpm --filter @qa-playwright/prisma generate
+RUN cd infra/prisma && pnpm generate
 
 # Build the web application
 RUN pnpm --filter @qa-playwright/web build
