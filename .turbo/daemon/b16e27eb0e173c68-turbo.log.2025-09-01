@@ -422,3 +422,31 @@
 2025-09-01T07:48:30.271563Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
 2025-09-01T07:48:30.571407Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.next/cache/webpack/client-development/4.pack.gz"), AnchoredSystemPathBuf("apps/web/.next/cache/webpack/client-development/index.pack.gz"), AnchoredSystemPathBuf("apps/web/.next/cache/webpack/client-development/index.pack.gz.old"), AnchoredSystemPathBuf("apps/web/.next/cache/webpack/client-development/5.pack.gz"), AnchoredSystemPathBuf("apps/web/.next/cache/webpack/client-development/6.pack.gz_"), AnchoredSystemPathBuf("apps/web/.next/cache/webpack/client-development/3.pack.gz"), AnchoredSystemPathBuf("apps/web/.next/cache/webpack/client-development/4.pack.gz_"), AnchoredSystemPathBuf("apps/web/.next/cache/webpack/client-development/5.pack.gz_"), AnchoredSystemPathBuf("apps/web/.next/cache/webpack/client-development/6.pack.gz"), AnchoredSystemPathBuf("apps/web/.next/cache/webpack/client-development/index.pack.gz_"), AnchoredSystemPathBuf("apps/web/.next/cache/webpack/client-development/3.pack.gz_")}
 2025-09-01T07:48:30.571423Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-09-01T07:51:24.562173Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".gitignore")}
+2025-09-01T07:51:24.562397Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-09-01T07:55:51.244878Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("infra/prisma/dist"), AnchoredSystemPathBuf("packages/shared/.turbo"), AnchoredSystemPathBuf("infra/prisma/.turbo"), AnchoredSystemPathBuf("packages/shared/dist")}
+2025-09-01T07:55:51.244944Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@qa-playwright/shared"), path: AnchoredSystemPathBuf("packages/shared") }, WorkspacePackage { name: Other("@qa-playwright/prisma"), path: AnchoredSystemPathBuf("infra/prisma") }}))
+2025-09-01T07:55:51.338128Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-09-01T07:55:51.338175Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-09-01T07:55:51.349624Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shared/dist")}
+2025-09-01T07:55:51.349636Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@qa-playwright/shared"), path: AnchoredSystemPathBuf("packages/shared") }}))
+2025-09-01T07:55:51.349660Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-09-01T07:55:51.444936Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.turbo")}
+2025-09-01T07:55:51.444951Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-09-01T08:02:09.123692Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("railway.json")}
+2025-09-01T08:02:09.123786Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-09-01T08:02:09.223288Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("railway.json")}
+2025-09-01T08:02:09.223303Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-09-01T08:02:15.222828Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("railway.json")}
+2025-09-01T08:02:15.222844Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-09-01T08:02:15.321408Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("railway.json")}
+2025-09-01T08:02:15.321423Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-09-01T08:10:01.722780Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/next.config.js")}
+2025-09-01T08:10:01.722862Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-09-01T08:10:01.820118Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/next.config.js")}
+2025-09-01T08:10:01.820133Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-09-01T08:10:01.919023Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/next.config.js")}
+2025-09-01T08:10:01.919037Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-09-01T08:10:11.718597Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/worker/dist"), AnchoredSystemPathBuf("apps/worker/.turbo")}
+2025-09-01T08:10:11.718624Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@qa-playwright/worker"), path: AnchoredSystemPathBuf("apps/worker") }}))
+2025-09-01T08:10:11.718676Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
