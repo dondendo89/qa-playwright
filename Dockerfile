@@ -35,15 +35,19 @@ WORKDIR /app
 COPY --from=base /app/apps/web/.next ./apps/web/.next
 COPY --from=base /app/apps/web/package.json ./apps/web/
 COPY --from=base /app/apps/web/public ./apps/web/public
+COPY --from=base /app/apps/web/next.config.js ./apps/web/
 COPY --from=base /app/node_modules ./node_modules
 COPY --from=base /app/package.json ./
 COPY --from=base /app/pnpm-workspace.yaml ./
+COPY --from=base /app/packages ./packages
+COPY --from=base /app/infra ./infra
 
 # Expose port
 EXPOSE $PORT
 
 # Start web application
-CMD ["sh", "-c", "cd apps/web && next start -H 0.0.0.0 -p ${PORT:-3000}"]
+WORKDIR /app/apps/web
+CMD ["sh", "-c", "next start -H 0.0.0.0 -p ${PORT:-3000}"]
 
 # Production stage for worker
 FROM node:18-alpine AS worker
