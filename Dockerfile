@@ -1,6 +1,9 @@
 # Use Node.js 18 Alpine as base image
 FROM node:18-alpine
 
+# Install OpenSSL and other required dependencies for Prisma
+RUN apk add --no-cache openssl1.1-compat
+
 # Enable Corepack for pnpm
 RUN corepack enable
 
