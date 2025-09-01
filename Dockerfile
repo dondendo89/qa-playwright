@@ -1,8 +1,8 @@
 # Use Node.js 18 Alpine as base image
-FROM node:18-alpine AS base
+FROM node:18-alpine
 
-# Install pnpm
-RUN npm install -g pnpm
+# Enable Corepack for pnpm
+RUN corepack enable
 
 # Set working directory
 WORKDIR /app
@@ -23,38 +23,15 @@ COPY . .
 # Generate Prisma client
 RUN pnpm --filter @qa-playwright/prisma generate
 
-# Build all packages
-RUN pnpm run build
-
-# Production stage for web
-FROM node:18-alpine AS web
-RUN npm install -g pnpm
-WORKDIR /app
-
-# Copy everything from base stage
-COPY --from=base /app ./
+# Build the web application
+RUN pnpm --filter @qa-playwright/web build
 
 # Expose port
 EXPOSE $PORT
 
-# Set environment variable for Next.js
-ENV HOSTNAME="0.0.0.0"
-ENV PORT=${PORT:-3000}
+# Set environment variables
+ENV NODE_ENV=production
+ENV HOSTNAME=0.0.0.0
 
-# Start web application using pnpm
-CMD ["sh", "-c", "PORT=${PORT:-3000} pnpm --filter @qa-playwright/web start -- -H 0.0.0.0 -p ${PORT:-3000}"]
-
-# Production stage for worker
-FROM node:18-alpine AS worker
-RUN npm install -g pnpm
-WORKDIR /app
-
-# Copy built worker application
-COPY --from=base /app/apps/worker/dist ./apps/worker/dist
-COPY --from=base /app/apps/worker/package.json ./apps/worker/
-COPY --from=base /app/node_modules ./node_modules
-COPY --from=base /app/package.json ./
-COPY --from=base /app/pnpm-workspace.yaml ./
-
-# Start worker application
-CMD ["pnpm", "--filter", "@qa-playwright/worker", "start"]
+# Start the web application
+CMD ["sh", "-c", "cd apps/web && PORT=${PORT:-3000} npx next start -H 0.0.0.0 -p ${PORT:-3000}"]
