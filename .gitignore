@@ -1,1 +1,32 @@
-node_modules
+node_modules/
+.env
+.env.local
+.env.production.local
+.env.development.local
+dist/
+build/
+.turbo/
+*.log
+.DS_Store
+
+# Next.js
+.next/
+.vercel/
+
+# Production
+out/
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env*.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
