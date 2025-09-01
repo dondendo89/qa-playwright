@@ -24,7 +24,7 @@ export const PRICING_PLANS = {
   starter: {
     name: 'Starter',
     price: 9.99,
-    priceId: 'price_starter_monthly', // Replace with actual Stripe price ID
+    priceId: process.env.STRIPE_BASIC_PRICE_ID || 'price_starter_monthly',
     features: [
       '100 test al mese',
       'Supporto email',
@@ -36,7 +36,7 @@ export const PRICING_PLANS = {
   professional: {
     name: 'Professional',
     price: 29.99,
-    priceId: 'price_professional_monthly', // Replace with actual Stripe price ID
+    priceId: process.env.STRIPE_PRO_PRICE_ID || 'price_professional_monthly',
     features: [
       '500 test al mese',
       'Supporto prioritario',
@@ -50,7 +50,7 @@ export const PRICING_PLANS = {
   enterprise: {
     name: 'Enterprise',
     price: 99.99,
-    priceId: 'price_enterprise_monthly', // Replace with actual Stripe price ID
+    priceId: process.env.STRIPE_ENTERPRISE_PRICE_ID || 'price_enterprise_monthly',
     features: [
       'Test illimitati',
       'Supporto dedicato',
