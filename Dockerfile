@@ -1,8 +1,8 @@
-# Use Node.js 18 Alpine as base image
-FROM node:18-alpine
+# Use Node.js 18 Debian slim as base image
+FROM node:18-slim
 
-# Install OpenSSL and other required dependencies for Prisma
-RUN apk add --no-cache openssl openssl-dev libc6-compat
+# Install required dependencies for Prisma
+RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Enable Corepack for pnpm
 RUN corepack enable
