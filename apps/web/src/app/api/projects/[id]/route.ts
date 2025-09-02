@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/lib/auth'
-import prisma from '../../../../../infra/prisma/client'
+import prisma from '@qa-playwright/prisma/client'
 
 // GET /api/projects/[id] - Get a specific project
 export async function GET(
